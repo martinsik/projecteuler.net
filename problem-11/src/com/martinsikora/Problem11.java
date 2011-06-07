@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class Problem11 {
 
@@ -15,7 +16,6 @@ public class Problem11 {
 		long cycles = 0;
 		int max = 0;
 		int product = 0;
-		int point[] = new int[2];
 		
 		/**
 		 * load grid
@@ -63,23 +63,32 @@ public class Problem11 {
 		/**
 		 * diagonal
 		 */
-		int product2, product3, product4, product5, product6, product7, product8;
-		for (int j = 0; j <= grid.length - 4; j++) {
-			for (int k = 0; k <= grid[j].length - 4; k++) {
-				cycles += 4;
-				product = grid[j][k] * grid[j+1][k+1] * grid[j+2][k+2] * grid[j+3][k+3]; // top-left
-				//product5 = grid[j][k] * grid[j-1][k+1] * grid[j-2][k+2] * grid[j-3][k+3];
+		product = 0;
+		for (int j = 0; j < grid.length; j++) {
+			for (int k = 0; k < grid[j].length; k++) {
+				if (j-3 >= 0 && k-3 >=0) {
+					cycles++;
+					product = grid[j-3][k-3] * grid[j-2][k-2] * grid[j-1][k-1] * grid[j][k];
+					max = Math.max(max, product);
+				}
 				
-				product4 = grid[j][19-k-3] * grid[j+1][19-k-2] * grid[j+2][19-k-1] * grid[j+3][19-k]; // top-right
+				if (j-3 >= 0 && k+3 < 20) {
+					cycles++;
+					product = grid[j-3][k+3] * grid[j-2][k+2] * grid[j-1][k+1] * grid[j][k];
+					max = Math.max(max, product);
+				}
 				
-				product2 = grid[19-j-3][k] * grid[19-j-2][k+1] * grid[19-j-1][k+2] * grid[19-j][k+3]; // bottom-left
-				product3 = grid[19-j-3][19-k-3] * grid[19-j-2][19-k-2] * grid[19-j-1][19-k-1] * grid[19-j][19-k]; // bottom-right
-				
-				
-				//product6 = grid[j][k] * grid[j-1][k+1] * grid[j-2][k+2] * grid[j-3][k+3];
-				
-				max = Math.max(max, Math.max(Math.max(product, product2), Math.max(product3, product4)));
-				//max = Math.max(max, product5);
+				if (j+3 < 20 && k-3 >= 0) {
+					cycles++;
+					product = grid[j+3][k-3] * grid[j+2][k-2] * grid[j+1][k-1] * grid[j][k];
+					max = Math.max(max, product);
+				}
+
+				if (j+3 < 20 && k+3 < 20) {
+					cycles++;
+					product = grid[j+3][k+3] * grid[j+2][k+2] * grid[j+1][k+1] * grid[j][k];
+					max = Math.max(max, product);
+				}
 			}
 		}
 		
