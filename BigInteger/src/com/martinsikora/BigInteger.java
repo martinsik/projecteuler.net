@@ -1,5 +1,7 @@
 package com.martinsikora;
 
+import java.util.ArrayList;
+
 public class BigInteger {
 	
 	public static long cycles;
@@ -104,6 +106,23 @@ public class BigInteger {
 		}
 		return str.toString();
 		
+	}
+	
+	public static int[] divisors(long num) {
+		ArrayList<Integer> divisors = new ArrayList<Integer>();
+		for (int i=1; i <= num / 2; i++) {
+			cycles++;
+			if (num % i == 0) {
+				divisors.add(i);
+			}
+		}
+		divisors.add((int) num);
+		
+		int[] retArray = new int[divisors.size()];
+		for (int i = 0; i < divisors.size(); i++) {
+			retArray[i] = divisors.get(i);
+		}
+		return retArray;
 	}
 	
 }
