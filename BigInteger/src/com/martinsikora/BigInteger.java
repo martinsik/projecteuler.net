@@ -110,13 +110,21 @@ public class BigInteger {
 	
 	public static int[] divisors(long num) {
 		ArrayList<Integer> divisors = new ArrayList<Integer>();
-		for (int i=1; i <= num / 2; i++) {
+		
+		for (int i = 1; true; i++) {
 			cycles++;
 			if (num % i == 0) {
+				int div = (int) num / i;
+				if (div <= i) {
+					if (div == i) { // 5 * 5 case
+						divisors.add(i);
+					}
+					break;
+				}
 				divisors.add(i);
+				divisors.add(div);
 			}
 		}
-		divisors.add((int) num);
 		
 		int[] retArray = new int[divisors.size()];
 		for (int i = 0; i < divisors.size(); i++) {

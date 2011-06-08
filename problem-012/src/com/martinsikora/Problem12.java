@@ -10,7 +10,7 @@ public class Problem12 {
 		
 		while (true) {
 			triangle = i * (i+1) / 2;
-			if (BigInteger.divisors(triangle).length > 200) {
+			if (BigInteger.divisors(triangle).length > 500) {
 				break;
 			}
 			i++;

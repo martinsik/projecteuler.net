@@ -13,6 +13,12 @@ public class DivisorsTest extends TestCase {
     @Test
     public void testSmallNumbers() {
     	assertEquals(6, BigInteger.divisors(28).length);
+    	assertEquals(3, BigInteger.divisors(25).length);
+    }
+    
+    @Test
+    public void testLargeNumbers() {
+    	assertEquals(576, BigInteger.divisors(76576500).length);
     }
     
 	
