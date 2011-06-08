@@ -41,5 +41,17 @@ public class Problem17 {
 		// TODO Auto-generated method stub
 
 	}
+	
+	protected int getValue(int num) {
+		int total = 0;
+		if (num >= 100) {
+			total += numbers[num/100] + hundred;
+			num /= 100;
+		}
+		if (num == 10) {
+			total += numbersTeens[0];
+		}
+		return total;
+	}
 
 }
