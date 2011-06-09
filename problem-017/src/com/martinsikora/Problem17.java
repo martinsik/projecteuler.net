@@ -2,7 +2,7 @@ package com.martinsikora;
 
 public class Problem17 {
 
-	static int[] numbers = {4,3,3,5,4,4,3,5,5,4};
+	static int[] numbers = {0,3,3,5,4,4,3,5,5,4};
 	
 	/*
 	 * 10 - ten
@@ -32,26 +32,59 @@ public class Problem17 {
 	
 	static int hundred = 7;
 	
-	static int thousand = 8; 
+	static int thousand = 8;
+	
+	static int and = 3; 
 	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		
+		int total = 0;
+		for (int i=1; i < 1000; i++) {
+			total += getValue(i);
+		}
+		total += numbers[1] + thousand;
+		
+		System.out.println("Total: " + total);
+		
+		/*
+		System.out.println("4: "   + getValue(4));
+		System.out.println("12: "  + getValue(12));
+		System.out.println("123: " + getValue(123));
+		System.out.println("505: " + getValue(505));
+		*/
+		/*
+		System.out.println("342: " + getValue(342)); // 23
+		System.out.println("115: " + getValue(115)); // 20
+		*/
 	}
 	
-	protected int getValue(int num) {
+	protected static int getValue(int num) {
 		int total = 0;
 		if (num >= 100) {
 			total += numbers[num/100] + hundred;
-			num /= 100;
+			num -= (num/100) * 100;
+			
+			if (num > 0) {
+				total += and;
+			}
 		}
-		if (num == 10) {
-			total += numbersTeens[0];
+		
+		if (num >= 10) {
+			if (num >= 10 && num <= 19) {
+				total += numbersTeens[num-10];
+				return total;
+			} else {
+				total += tens[num/10 - 2];
+			}
+			num -= (num/10) * 10;
 		}
+		
+		total += numbers[num];
 		return total;
 	}
 
 }
+

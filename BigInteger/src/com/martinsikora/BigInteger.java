@@ -133,4 +133,43 @@ public class BigInteger {
 		return retArray;
 	}
 	
+	
+	public static String pow(int n, int power) {
+		// sliding window method
+		int powered = 1;
+		int windowSize = 0;
+		int powerTmp = power;
+		
+		if (powerTmp % 2 != 0) {
+			powerTmp--;
+		}
+		
+		while (powerTmp > 1) {
+			windowSize++;
+			powerTmp /= 2;
+		}
+		String[] window = new String[windowSize+1];
+		window[0] = Integer.toString(n);
+		
+		for (int i=1; i < window.length; i++) {
+			window[i] = BigInteger.multiply(window[i-1], window[i-1]);
+		}
+		powered = (int) Math.pow(2, windowSize);
+		
+		String result = window[window.length-1];
+		
+		if (powered != power) {
+			int resPower = power - powered;
+			while (resPower != 0) {
+				int index = (int) Math.floor(Math.sqrt(resPower)) - 1;
+				int newPower = (int) Math.pow(2, index);
+				result = BigInteger.multiply(result, window[index]);
+				resPower -= newPower;
+			}
+		}
+		
+		return result;
+	}
+
+	
 }
