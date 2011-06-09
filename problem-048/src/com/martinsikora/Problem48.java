@@ -1,5 +1,8 @@
 package com.martinsikora;
 
+/*
+ * Last ten: 9110846700
+ */
 public class Problem48 {
 
 	

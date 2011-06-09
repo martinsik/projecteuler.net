@@ -14,7 +14,7 @@ public class BigInteger {
 	 * @return  returns multiplied numbers
 	 */
 	public static String multiply(String first, String second) {
-		byte[][] sums = new byte[Math.max(first.length(), second.length())][first.length() + second.length()];
+		int[][] sums = new int[Math.max(first.length(), second.length())][first.length() + second.length()];
 		int padding = 0;
 		
 		while (first.length() != second.length()) {
@@ -64,10 +64,10 @@ public class BigInteger {
 			}
 		}
 		
-		byte[][] bytes = new byte[2][first.length()];
+		int[][] bytes = new int[2][first.length()];
 		for (int i=0; i < bytes[0].length; i++) {
-			bytes[0][i] = (byte) Integer.parseInt(first.substring(i, i+1));
-			bytes[1][i] = (byte) Integer.parseInt(second.substring(i, i+1));
+			bytes[0][i] = (int) Integer.parseInt(first.substring(i, i+1));
+			bytes[1][i] = (int) Integer.parseInt(second.substring(i, i+1));
 		}
 		
 		return BigInteger.sum(bytes);
@@ -79,8 +79,8 @@ public class BigInteger {
 	 * @param   bytes   Two dimensional array of numbers stored as bytes
 	 * @return  returns sumed numbers
 	 */
-	public static String sum(byte[][] bytes) {
-		byte[] newNum = new byte[bytes[0].length + 1];
+	public static String sum(int[][] bytes) {
+		int[] newNum = new int[bytes[0].length + 1];
 		for (int i=bytes[0].length-1; i >= 0; i--) {
 			int k = i+1;
 			int sum = 0;
@@ -90,11 +90,11 @@ public class BigInteger {
 			}
 			newNum[k] += sum % 10;
 			if (newNum[k] >= 10) {
-				newNum[k-1] = (byte) (newNum[k] / 10);
-				newNum[k] = (byte) (newNum[k] % 10);
+				newNum[k-1] = (int) (newNum[k] / 10);
+				newNum[k] = (int) (newNum[k] % 10);
 			}
 			if (k > 0) {
-				newNum[k-1] += (byte) (sum / 10);
+				newNum[k-1] += (int) (sum / 10);
 			}
 		}
 		
@@ -161,7 +161,7 @@ public class BigInteger {
 		if (powered != power) {
 			int resPower = power - powered;
 			while (resPower != 0) {
-				int index = (int) Math.floor(Math.sqrt(resPower)) - 1;
+				int index = (int)Math.floor(Math.log(resPower) / Math.log(2));
 				int newPower = (int) Math.pow(2, index);
 				result = BigInteger.multiply(result, window[index]);
 				resPower -= newPower;
