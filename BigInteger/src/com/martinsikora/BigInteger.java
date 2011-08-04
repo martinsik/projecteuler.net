@@ -135,7 +135,9 @@ public class BigInteger {
 	
 	
 	public static String pow(int n, int power) {
-		// sliding window method
+		/**
+		 * sliding window method
+		 */
 		int powered = 1;
 		int windowSize = 0;
 		int powerTmp = power;

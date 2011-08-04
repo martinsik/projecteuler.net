@@ -30,7 +30,7 @@ public class Problem79 {
 			System.out.println(i + ": " + (attempts[i] > 0 ? (float) poss[i] / attempts[i] : 0));
 		}
 		// sort by most typical occurance and skip 4 and 5
-		// 7
+		// 73162890
 	}
 
 }
